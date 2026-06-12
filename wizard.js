@@ -122,14 +122,20 @@ function selectProductType(type) {
     if (type === 'screen') {
         document.getElementById('step2').style.display = 'block';
     } else {
-        // For shades, skip screen type and go to size
-        document.getElementById('step3').style.display = 'block';
+        // For shades, go to shade type selection
+        document.getElementById('step2-shade').style.display = 'block';
     }
 }
 
 function selectScreenType(type) {
     currentScreenType = type;
     document.getElementById('step2').style.display = 'none';
+    document.getElementById('step3').style.display = 'block';
+}
+
+function selectShadeType(type) {
+    currentScreenType = type;
+    document.getElementById('step2-shade').style.display = 'none';
     document.getElementById('step3').style.display = 'block';
 }
 
@@ -146,7 +152,7 @@ function showResults() {
     if (currentProductType === 'screen') {
         data = galleryData.screen[currentScreenType][currentSize];
     } else {
-        data = galleryData.shade.motorized[currentSize];
+        data = galleryData.shade[currentScreenType][currentSize];
     }
     
     document.getElementById('resultsTitle').textContent = data.title;
@@ -167,20 +173,25 @@ function showResults() {
         galleryGrid.appendChild(galleryItem);
     });
     
-    window.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
 }
 
 function backToStep1() {
     currentProductType = null;
     currentScreenType = null;
     document.getElementById('step2').style.display = 'none';
+    document.getElementById('step2-shade').style.display = 'none';
     document.getElementById('step1').style.display = 'block';
 }
 
 function backToStep2() {
     currentScreenType = null;
     document.getElementById('step3').style.display = 'none';
-    document.getElementById('step2').style.display = 'block';
+    if (currentProductType === 'screen') {
+        document.getElementById('step2').style.display = 'block';
+    } else {
+        document.getElementById('step2-shade').style.display = 'block';
+    }
 }
 
 function startOver() {
