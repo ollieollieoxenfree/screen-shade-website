@@ -14,6 +14,7 @@
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#products">Products</a></li>
+                <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -25,7 +26,7 @@
         <div class="container">
             <h1>Quality Screens & Shades for Every Need</h1>
             <p>Professional motorized and manual solutions to keep bugs out and comfort in.</p>
-            <button class="cta-button">Get a Quote</button>
+            <button class="cta-button" onclick="document.getElementById('gallery').scrollIntoView({behavior: 'smooth'})">See Our Work</button>
         </div>
     </section>
 
@@ -68,11 +69,70 @@
         </div>
     </section>
 
+    <!-- Gallery/Wizard Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2>Find Your Solution</h2>
+            <p class="gallery-subtitle">Answer a few quick questions to see similar installations we've completed</p>
+            
+            <div class="wizard-container">
+                <!-- Step 1: Product Type -->
+                <div class="wizard-step" id="step1">
+                    <h3>What are you interested in?</h3>
+                    <div class="wizard-buttons">
+                        <button class="wizard-btn" onclick="selectProductType('screen')">🖼️ Screen</button>
+                        <button class="wizard-btn" onclick="selectProductType('shade')">☀️ Shade</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Screen Type (for screens) -->
+                <div class="wizard-step" id="step2" style="display:none;">
+                    <h3>What type of screen?</h3>
+                    <div class="wizard-buttons">
+                        <button class="wizard-btn" onclick="selectScreenType('motorized')">🤖 Motorized</button>
+                        <button class="wizard-btn" onclick="selectScreenType('manual')">🔧 Manual</button>
+                    </div>
+                    <button class="back-btn" onclick="backToStep1()">← Back</button>
+                </div>
+
+                <!-- Step 2b: Shade Type (for shades) -->
+                <div class="wizard-step" id="step2-shade" style="display:none;">
+                    <h3>What type of shade?</h3>
+                    <div class="wizard-buttons">
+                        <button class="wizard-btn" onclick="selectShadeType('motorized')">🤖 Motorized</button>
+                        <button class="wizard-btn" onclick="selectShadeType('manual')">🔧 Manual</button>
+                    </div>
+                    <button class="back-btn" onclick="backToStep1()">← Back</button>
+                </div>
+
+                <!-- Step 3: Size -->
+                <div class="wizard-step" id="step3" style="display:none;">
+                    <h3>What size opening?</h3>
+                    <div class="wizard-buttons">
+                        <button class="wizard-btn" onclick="selectSize('small')">📏 Small (2-5 ft)</button>
+                        <button class="wizard-btn" onclick="selectSize('medium')">📐 Medium (5-10 ft)</button>
+                        <button class="wizard-btn" onclick="selectSize('large')">📊 Large (10+ ft)</button>
+                    </div>
+                    <button class="back-btn" onclick="backToStep2()">← Back</button>
+                </div>
+
+                <!-- Results Gallery -->
+                <div class="wizard-step" id="results" style="display:none;">
+                    <h3 id="resultsTitle">Similar Installations</h3>
+                    <div class="gallery-grid" id="galleryGrid">
+                        <!-- Images will be inserted here -->
+                    </div>
+                    <button class="back-btn" onclick="startOver()">← Start Over</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
             <h2>About Us</h2>
-            <p>We've been providing quality screens and shades to homeowners and businesses for years. Our commitment is to deliver durable, reliable products and exceptional service to every customer.</p>
+            <p>We specialize in custom and large-format screens and shades. Whether you have an unusual opening size, a challenging installation, or simply need something unique, we've tackled it before and have the expertise to solve your problem.</p>
             <div class="features">
                 <div class="feature">
                     <h4>Quality Materials</h4>
@@ -118,5 +178,7 @@
             <p>&copy; 2024 Screens & Shades Co. All rights reserved.</p>
         </div>
     </footer>
+
+    <script src="wizard.js"></script>
 </body>
 </html>
